@@ -29,12 +29,15 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
+        android:backgroundTint="#DDA400"
         android:ems="10"
+        android:hint="Correu"
+        android:textColorHint="@color/white"
+
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        android:hint="Correu"/>
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <EditText
         android:id="@+id/editTextTextPersonName5"
@@ -43,12 +46,15 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
+        android:backgroundTint="#DDA400"
         android:ems="10"
+        android:hint="Contrassenya"
+        android:textColorHint="@color/white"
         android:inputType="textPersonName"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3"
-        android:hint="Contrassenya"/>
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
 
     <Button
         android:id="@+id/button3"
@@ -58,6 +64,8 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:text="Login"
+        android:textSize="20sp"
+        android:textColor="@color/white"
         android:background="@drawable/boton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
