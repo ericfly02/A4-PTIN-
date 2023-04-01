@@ -118,6 +118,7 @@
         android:layout_marginEnd="32dp"
         android:background="@drawable/boton"
         android:scaleType="centerInside"
+        android:onClick="registre_google"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button3"

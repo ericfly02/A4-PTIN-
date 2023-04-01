@@ -1,9 +1,12 @@
 package com.example.transmed;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,14 +27,20 @@ public class login extends AppCompatActivity {
 
     EditText inputcorreu, input_contrassenya;
 
-    GoogleSignInOptions gso;
-    GoogleSignInClient gsc;
-    ImageView googleBtn;
+    // Declarar variables globales
+    GoogleSignInClient googleSignInClient;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        // Inicializar el cliente de inicio de sesión de Google
+        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
     }
 
     public void login(View view) {
@@ -61,48 +70,52 @@ public class login extends AppCompatActivity {
         }
     }
 
-    public void google (){
-        googleBtn = findViewById(R.id.boton_google);
-
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        gsc = GoogleSignIn.getClient(this, gso);
-
-        googleBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signIn();
-            }
-        });
-    }
-
-    void signIn(){
-        Intent signInIntent = gsc.getSignInIntent();
-        startActivityForResult(signInIntent,1000);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode,Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1000){
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-
-            try {
-                task.getResult(ApiException.class);
-                navigateToSecondActivity();
-            } catch (ApiException e) {
-                Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-    }
-    void navigateToSecondActivity(){
-        finish();
-        Intent intent = new Intent(login.this, Welcome_popup.class);
-        startActivity(intent);
-    }
-
     public void showerror(EditText input, String s){
         input.setError(s);
         input.requestFocus();
+    }
+
+    public void loginWithGoogle(View view) {
+        Intent signInIntent = googleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    private static final int RC_SIGN_IN = 9001;
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Resultado del inicio de sesión de Google
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                // Inicio de sesión exitoso
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+
+                // Aquí se puede obtener el nombre, correo electrónico y otros datos del usuario de la cuenta de Google
+                // y utilizarlos para el inicio de sesión en la aplicación
+                SharedPreferences preferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("email", account.getEmail());
+                editor.putString("name", account.getDisplayName());
+                editor.apply();
+
+                // Guardamos en variables el correo y el password para acceder a la base de datos
+                String email = preferences.getString("email", "");
+
+
+
+                // Cambiamos de actividad
+                // Aquí se puede obtener el nombre, correo electrónico y otros datos del usuario de la cuenta de Google
+                // y utilizarlos para el inicio de sesión en la aplicación
+                Intent intent = new Intent(this, Welcome_popup.class); // Reemplaza NuevaActividad con el nombre de la actividad a la que quieres ir
+                startActivity(intent);
+
+            } catch (ApiException e) {
+                // Inicio de sesión fallido
+                Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+            }
+        }
     }
 }

@@ -82,7 +82,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="130dp"
         android:background="@drawable/boton"
-        android:onClick="google"
+        android:onClick="loginWithGoogle"
         android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="parent"

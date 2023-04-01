@@ -1,5 +1,6 @@
 package com.example.transmed;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -27,6 +28,29 @@ public class Welcome_popup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_popup);
 
+        findViewById(R.id.boton_signout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signOut();
+            }
+        });
+
     }
+
+    private void signOut() {
+        // Desconectar al usuario de Google Sign-In
+        GoogleSignIn.getClient(this, GoogleSignInOptions.DEFAULT_SIGN_IN).signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // Redirigir a la actividad de inicio de sesión
+                        Intent intent = new Intent(Welcome_popup.this, login_o_registre.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+    }
+
 
 }
