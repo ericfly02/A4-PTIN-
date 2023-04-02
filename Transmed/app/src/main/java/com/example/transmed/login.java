@@ -15,6 +15,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.transmed.databinding.ActivityMainBinding;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -23,8 +29,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
-public class login extends AppCompatActivity {
+import org.json.JSONException;
+import org.json.JSONObject;
 
+public class login extends AppCompatActivity {
+    private RequestQueue requestQueue;
+
+    String apiUrl = "http://10.0.2.2:3000";
+    String getEndpoint = apiUrl + "/medicaments";
     EditText inputcorreu, input_contrassenya;
 
     // Declarar variables globales
@@ -34,6 +46,8 @@ public class login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        requestQueue = Volley.newRequestQueue(this);
 
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -52,8 +66,10 @@ public class login extends AppCompatActivity {
         String _contrassenya = (input_contrassenya.getText()).toString();
 
         // Aqui fem la consulta amb la API a la base de dades per veure si existeix el usuari
-
+        //Dani: La direccio i port de la API es bona practica definirla a /res/values/strings.xml
         if(_correu != "admin@1234" && _contrassenya != "1234"){
+            //Dani: Verificar que l'usuari existeix i rebre token per mantindre la connexió
+            checkUser(_correu);
             Intent intent = new Intent(this, Welcome_popup.class);
             startActivity(intent);
         }
@@ -117,5 +133,67 @@ public class login extends AppCompatActivity {
                 Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
             }
         }
+    }
+
+    private void sendGetRequest(String url) {
+        System.out.println("Test2");
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Procesa la respuesta del servidor aquí
+                        System.out.println("Respuesta del servidor recibida");
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Maneja el error aquí
+                        System.out.println(error);
+                    }
+                });
+
+        requestQueue.add(getRequest);
+    }
+
+    private void checkUser(String email) {
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "http://10.0.2.2:3000/checkuser"; // Reemplaza con la dirección de tu API
+
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("email", email);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            boolean exists = response.getBoolean("exists");
+                            String message = response.getString("message");
+                            // Realiza acciones según el resultado
+                            if (exists) {
+                                // El usuario existe
+                                System.out.println("L'usuari existeix");
+                            } else {
+                                // El usuario no existe
+                                System.out.println("L'usuari NO existeix");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Error al realizar la solicitud
+                        error.printStackTrace();
+                    }
+                });
+
+        queue.add(jsonObjectRequest);
     }
 }

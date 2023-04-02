@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Transmed</string>
+<!--    Local maquina Dani:-->
+    <string name="api_base_url">http://localhost:3000/users</string>
 </resources>
