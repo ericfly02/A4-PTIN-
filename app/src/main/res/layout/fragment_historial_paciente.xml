@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".medico.fragments.historialPaciente.HistorialPacienteFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="#000000"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="Informe mèdic"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000000"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:text="Metge: "/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000000"
+                    android:textSize="18dp"
+                    android:text="Pedro Fernández Alvarez"/>
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="#000000"
+                android:background="@color/design_default_color_primary"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                android:text="Dades personals"/>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:columnCount="2"
+                android:rowCount="8">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_margin="5dp"
+                    android:textColor="#000000"
+                    android:textSize="18dp"
+                    android:text="Nom:" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_row="1"
+                    android:layout_column="0"
+                    android:layout_margin="5dp"
+                    android:textColor="#000000"
+                    android:textSize="18dp"
+                    android:text="Cognoms:" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_row="2"
+                    android:layout_column="0"
+                    android:layout_margin="5dp"
+                    android:textColor="#000000"
+                    android:textSize="18dp"
+                    android:text="Nº d'identificació:\n(DNI/NIF)" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_row="3"
+                    android:layout_column="0"
+                    android:layout_margin="5dp"
+                    android:textColor="#000000"
+                    android:textSize="18dp"
+                    android:text="Data de naixement:" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_row="4"
+                    android:layout_column="0"
+                    android:layout_margin="5dp"
+                    android:textColor="#000000"
+                    android:textSize="18dp"
+                    android:text="Gènere:" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_row="5"
+                    android:layout_column="0"
+                    android:layout_margin="5dp"
+                    android:textColor="#000000"
+                    android:textSize="18dp"
+                    android:text="Nº de Seguretat Social:" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_row="6"
+                    android:layout_column="0"
+                    android:layout_margin="5dp"
+                    android:textColor="#000000"
+                    android:textSize="18dp"
+                    android:text="País:" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_row="7"
+                    android:layout_column="0"
+                    android:layout_margin="5dp"
+                    android:textColor="#000000"
+                    android:textSize="18dp"
+                    android:text="Província:" />
+
+                <TextView
+                    android:id="@+id/txt_nombre_informe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:layout_margin="5dp"
+                    android:textSize="18dp"
+                    android:text="Juan" />
+
+                <TextView
+                    android:id="@+id/txt_apellido_informe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:layout_row="1"
+                    android:layout_column="1"
+                    android:layout_margin="5dp"
+                    android:textSize="18dp"
+                    android:text="Perez Sánchez" />
+
+                <TextView
+                    android:id="@+id/txt_dni_informe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:layout_row="2"
+                    android:layout_column="1"
+                    android:layout_margin="5dp"
+                    android:textSize="18dp"
+                    android:text="48024523J" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:layout_row="3"
+                    android:layout_column="1"
+                    android:layout_margin="5dp"
+                    android:textSize="18dp"
+                    android:text="11/04/2000" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:layout_row="4"
+                    android:layout_column="1"
+                    android:layout_margin="5dp"
+                    android:textSize="18dp"
+                    android:text="masculí" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:layout_row="5"
+                    android:layout_column="1"
+                    android:layout_margin="5dp"
+                    android:textSize="18dp"
+                    android:text="DSD441346895356" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:layout_row="6"
+                    android:layout_column="1"
+                    android:layout_margin="5dp"
+                    android:textSize="18dp"
+                    android:text="Espnaya" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:layout_row="7"
+                    android:layout_column="1"
+                    android:layout_margin="5dp"
+                    android:textSize="18dp"
+                    android:text="Barcelona" />
+            </GridLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000000"
+                android:background="@color/design_default_color_primary"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                android:text="Antecedents personals"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:text="Pare mort als 68 anys per complicacions de la diabetis tipus 2
+                \n\nBevedor moderat (2-3 begudes alcohòliques per setmana)"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000000"
+                android:background="@color/design_default_color_primary"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                android:text="Problemes de salut actuals"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:text="Dolor al pit amb freqüència, que es descriu com una opressió al centre del pit i que s'irradia cap al braç esquerre.
+                              \n\nFatiga extrema i manca denergia durant el dia.
+                              \n\nSuors nocturns.
+                              \n\nDificultat per respirar després de fer exercici."/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:background="@color/design_default_color_primary"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                android:text="Tractaments mèdics i farmacològics"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:text="Aspirina 81mg una vegada al dia.
+                              \n\nMetoprolol 50mg dues vegades al dia per al control de la hipertensió arterial.
+                              \n\nAtorvastatina 20mg una vegada al dia per al control del colesterol.
+                              \n\nNicotina pegats transdèrmics de 21mg al dia per a l'abandonament de l'hàbit de fumar-
+                              \n\nOxigen suplementari durant el son a causa de l'apnea del son severa.
+                              \n"/>
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>
